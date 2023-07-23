@@ -1,0 +1,173 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNN5aBm0kc3VqVjNdsVXnms",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/TopStrikr/testrepo/blob/main/Text%20Analysis%20via%20Python\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "wZk0wE6nvsSJ"
+      },
+      "outputs": [],
+      "source": [
+        "givenstring=\"Lorem ipsum dolor! diam amet, consetetur Lorem magna. sed diam nonumy eirmod tempor. diam et labore? et diam magna. et diam amet.\""
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class TextAnalyzer(object):\n",
+        "\n",
+        "    def __init__ (self, text):\n",
+        "        # remove punctuation\n",
+        "        formattedText = text.replace('.','').replace('!','').replace('?','').replace(',','')\n",
+        "\n",
+        "        # make text lowercase\n",
+        "        formattedText = formattedText.lower()\n",
+        "\n",
+        "        self.fmtText = formattedText\n",
+        "\n",
+        "    def freqAll(self):\n",
+        "        # split text into words\n",
+        "        wordList = self.fmtText.split(' ')\n",
+        "\n",
+        "        # Create dictionary\n",
+        "        freqMap = {}\n",
+        "        for word in set(wordList): # use set to remove duplicates in list\n",
+        "            freqMap[word] = wordList.count(word)\n",
+        "\n",
+        "        return freqMap\n",
+        "\n",
+        "    def freqOf(self,word):\n",
+        "        # get frequency map\n",
+        "        freqDict = self.freqAll()\n",
+        "\n",
+        "        if word in freqDict:\n",
+        "            return freqDict[word]\n",
+        "        else:\n",
+        "            return 0"
+      ],
+      "metadata": {
+        "id": "EbcYF31Cv5bY"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "analyzed = TextAnalyzer(givenstring)"
+      ],
+      "metadata": {
+        "id": "fJbsj7v3wenP"
+      },
+      "execution_count": 3,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Formatted Text:\", analyzed.fmtText)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "J2r1jvLqwjGC",
+        "outputId": "0922810d-ecdf-4dc9-ac0b-a9ae2a31607b"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Formatted Text: lorem ipsum dolor diam amet consetetur lorem magna sed diam nonumy eirmod tempor diam et labore et diam magna et diam amet\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "freqMap = analyzed.freqAll()\n",
+        "print(freqMap)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "NSDwRHfJwj53",
+        "outputId": "a65b6bf1-b440-490f-9d1f-265dc16e316a"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{'ipsum': 1, 'dolor': 1, 'consetetur': 1, 'eirmod': 1, 'tempor': 1, 'lorem': 2, 'diam': 5, 'labore': 1, 'sed': 1, 'amet': 2, 'nonumy': 1, 'magna': 2, 'et': 3}\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "word = \"lorem\"\n",
+        "frequency = analyzed.freqOf(word)\n",
+        "print(\"The word\",word,\"appears\",frequency,\"times.\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fmHZk-sYwr0n",
+        "outputId": "39139d5c-9f50-4bdd-b910-b837d68160c0"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "The word lorem appears 2 times.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "cZ2pVE_RxAvq"
+      },
+      "execution_count": 6,
+      "outputs": []
+    }
+  ]
+}
